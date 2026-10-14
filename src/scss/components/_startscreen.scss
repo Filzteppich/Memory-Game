@@ -1,0 +1,79 @@
+@use '../abstract/mixin';
+
+.startscreen{
+    height: 100%;
+    width: 1440px;
+    background-color: var(--startscreen-bg-c); 
+      @include mixin.dflex;
+}
+
+.startscreen-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 85px;
+}
+
+.startscreen-text{
+    color: white;
+    >p{
+        font-family: almarai;
+        font-size: 48px;
+        margin: 0;
+    }
+    >h1{
+        font-family:red-rose;
+        font-size: 140px;
+        margin: 0;
+    }
+}
+
+.startscreen-button{
+    width: 290px;
+    height: 135px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.start-button{
+    @include mixin.dflex;
+    width: 250px;
+    height: 98px;
+    background-color: var(--button-secondary-c);
+    padding: 24px;
+    gap: 20px;
+    font-family: red-rose;
+    font-size: 40px;
+    font-weight: bold;
+     transition: width 0.2s ease, height 0.2s ease;
+    &:hover{
+        width: 270px;
+        height: 102px;
+        cursor: pointer;
+        .controller_icon_container>img{
+            transform: rotate(-30deg) scale(1.2);
+        }
+        .arrow-right-icon{
+            transform: scale(1.7) translateX(3px);
+        }
+    }
+}
+
+.controller_icon_container{
+    @include mixin.dflex;
+    >img{
+        transition: transform 0.2s ease-in-out;
+    }
+}
+
+.arrow-right-icon{
+    width: 33px;
+    object-fit: contain;
+    transition: transform 0.2s ease-in-out
+}
+
+.arrow-icon-container{
+    @include mixin.dflex;
+}
+

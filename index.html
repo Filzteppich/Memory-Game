@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+
+    <section class="startscreen">
+        <div class="startscreen-content">
+            <div class="startscreen-text">
+                <p>It's play time.</p>
+                <h1>Ready to play?</h1>
+            </div>
+            <div class="startscreen-button">
+                <button id="" class="start-button">
+                    <div class="controller_icon_container">
+                        <img src="/assets/images/startscreen/stadia_controller_icon.png" alt="controller_icon">
+                    </div>
+                    <div>
+                        Play
+                    </div>
+                    <div class="arrow-icon-container">
+                        <img class="arrow-right-icon" src="/assets/images/startscreen/right-arrow (1).png" alt="">
+                    </div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="settingscreen d-none">
+        <div class="settingscreen-wrapper">
+            <div class="settings__headline">
+                <span class="settings__text">Settings</span> 
+            </div>
+            <div class="settings__content">
+                <div class="settings__content--left">
+                    <div class="game-settings">
+                        <div class="game-group">
+                            <div class="game-settings__icon">
+                                <img src="./public/assets/images/settingscreen/palette.png" alt="">
+                            </div>
+                            <div class="game-settings__group">
+                                <div class="game-settings__heading">
+                                    <span>Game Themes</span>
+                                </div>
+                                <div class="game-settings__options">
+                                    <div class="game-settings__option">
+                                        <label class="game-settings__radio">
+                                            <input type="radio" name="theme" value="codeVibeTheme">
+                                            <span>Code Vibe Theme</span>
+                                        </label>
+                                        <label class="game-settings__radio">
+                                            <input type="radio" name="theme" value="gamingTheme">
+                                            <span>Gaming Theme</span>
+                                        </label>
+                                        <label class="game-settings__radio">
+                                            <input type="radio" name="theme" value="daProjectTheme">
+                                            <span>DA Projects theme</span>
+                                        </label>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+
+                        <div class="game-group">
+                            <div class="game-settings__icon">
+                                <img src="./public/assets/images/settingscreen/chess_pawn.png" alt="">
+                            </div>
+                            <div class="game-settings__group">
+                                <div class="game-settings__heading">
+                                    <span>Choose Player</span>
+                                </div>
+                                <div class="game-settings__options">
+                                    <div class="game-settings__option">
+                                        <label class="game-settings__radio">
+                                            <input type="radio" name="player-colour" value="blue">
+                                            <span>Blue</span>
+                                        </label>
+                                        <label class="game-settings__radio">
+                                            <input type="radio" name="player-colour" value="orange">
+                                            <span>Orange</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                                                                   <div class="game-group">
+                            <div class="game-settings__icon">
+                                <img src="./public/assets/images/settingscreen/style.png" alt="">
+                            </div>
+                            <div class="game-settings__group">
+                                <div class="game-settings__heading">
+                                    <span>Board size</span>
+                                </div>
+                                <div class="game-settings__options">
+                                    <div class="game-settings__option">
+                                        <label class="game-settings__radio">
+                                            <input type="radio" name="board-size" value="16">
+                                            <span>16 Cards</span>
+                                        </label>
+                                        <label class="game-settings__radio">
+                                            <input type="radio" name="board-size" value="24">
+                                            <span>24 Cards</span>
+                                        </label>
+                                        <label class="game-settings__radio">
+                                            <input type="radio" name="board-size" value="36">
+                                            <span>36 Cards</span>
+                                        </label>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>  
+
+
+
+                    </div>
+                </div>
+                <div class="settings__content--right">
+                    <div class="overview__preview">
+                        <img id="themePreviewImg"  src="./public/assets/images/settingscreen/code-vibes-theme.png" alt="">
+                    </div>
+                    <div class="overview">
+                        <div class="overview__active-option"><span id="gameThemeOverview">Game Theme</span></div>
+                        <div class="overview__seperator"><hr></div>
+                        <div class="overview__active-option"><span id="gamePlayerOverview">Player</span></div>
+                        <div class="overview__seperator"><hr></div>
+                        <div class="overview__active-option"><span id="gameBoardOverview">Board size</span></div>
+                        <button disabled class="overview__start-button disabled">
+                            <img src="./public/assets/images/settingscreen/play-icon.png" alt="">
+                            <span>Start</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- <section id="field" class="field">
+        <button class="card"></button>
+        <button class="card"></button>
+        <button class="card"></button>
+        <button class="card"></button>
+        <button class="card"></button>
+        <button class="card"></button>
+        <button class="card"></button>
+    </section> -->
+</body>
+</html>
+<script type="module" src="./src/ts/home-screen.ts"></script>
+<script type="module" src="./src/ts/setting-screen.ts"></script>
+<script type="module" src="./src/main.ts"></script>

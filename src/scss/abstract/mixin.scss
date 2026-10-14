@@ -1,0 +1,11 @@
+@mixin dflex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+@mixin dflex-gap($gap){
+    display: flex;
+    gap: $gap;
+}

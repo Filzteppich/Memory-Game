@@ -1,0 +1,49 @@
+@use './components/startscreen';
+@use './base/fonts.scss';
+@use './abstract/mixin';
+@use './components/settingsscreen';
+
+
+
+body{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+:root{
+    --startscreen-bg-c:#303131;
+    --button-secondary-c: #F0EA6E;
+    --secondary-c: #F0EA6E;
+    --button-disabled-c: #DBDBD6;
+
+}
+
+
+.card{
+    height: 100px;
+    aspect-ratio: 1 /1;
+    background-color: bisque;
+    border-radius: 20px;
+}
+
+.is-flipped{
+    background-color: red;
+}
+
+.field{
+    display: flex;
+    gap: 12px;
+}
+
+.d-none{
+    display: none;
+}
+
+button{
+    padding: 14px 20px ;
+    &:hover{
+        cursor: pointer;
+    }
+}
