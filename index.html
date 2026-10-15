@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <section class="startscreen">
+    <section class="startscreen hidden">
         <div class="startscreen-content">
             <div class="startscreen-text">
                 <p>It's play time.</p>
@@ -29,7 +29,7 @@
         </div>
     </section>
 
-    <section class="settingscreen d-none">
+    <section class="settingscreen ">
         <div class="settingscreen-wrapper">
             <div class="settings__headline">
                 <span class="settings__text">Settings</span> 
@@ -143,16 +143,46 @@
         </div>
     </section>
 
+    <section class="gamescreen hidden">
+        <div class="gamescreen__wrapper">
+            <div class="game__header">
+                <div class="game__player-overview">
+                    <div class="game__blue-player">Blue 0</div>
+                    <div class="game__orange-player">Orange 0</div>
+                </div>
+                <div class="game__current-player-overview">
+                    Current Player: Blue
+                </div>
+                <div class="game__exit">
+                    <button>Exit Game</button>
+                </div>
+            </div>
+            <div class="game__field">
+                <section id="field" class="field">
+                    <button class="card"></button>
+                    <button class="card"></button>
+                    <button class="card"></button>
+                    <button class="card"></button>
+                    <button class="card"></button>
+                    <button class="card"></button>
+                    <button class="card"></button>
+                    <button class="card"></button>
+                    <button class="card"></button>
+                    <button class="card"></button>
+                    <button class="card"></button>
+                    <button class="card"></button>
+                    <button class="card"></button>
+                    <button class="card"></button>
+                    <button class="card"></button>
+                    <button class="card"></button>
+                </section>
 
-    <!-- <section id="field" class="field">
-        <button class="card"></button>
-        <button class="card"></button>
-        <button class="card"></button>
-        <button class="card"></button>
-        <button class="card"></button>
-        <button class="card"></button>
-        <button class="card"></button>
-    </section> -->
+            </div>
+        </div>
+    </section>
+
+
+
 </body>
 </html>
 <script type="module" src="./src/ts/home-screen.ts"></script>

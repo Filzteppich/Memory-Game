@@ -1,0 +1,77 @@
+@use "../abstract/mixin";
+
+
+.gamescreen{
+    height: 100%;
+    width: 1440px;
+    background-color: var(--gamescreen-bg-c);
+    display: flex;
+    justify-content: center;
+    &__wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 1219px;
+        background-color: transparent;
+        margin: 41px 112px 0 112px;
+        gap: 54px;
+    }
+}
+
+.game{
+    &__header{
+        font-family: 'red-rose';
+        font-size: 24px;
+        width: 100%;
+        height: 62px;
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__player-overview{
+        display: flex;
+        gap: 20px;
+        padding: 17px 20px;
+        background-color: #86E9D633;
+    }
+
+    &__orange-player{
+        color: var(--orange-player-c);
+    }
+    
+    &__blue-player{
+        color: var(--blue-player-c);
+    }
+
+    &__current-player-overview{
+        font-size: 26px;
+        color: white;
+    }
+
+    &__exit{
+        >button{
+            padding: 16px 24px;
+            background-color: #86E9D633;
+            color: white;
+            border: solid 1px #4DD5BC;
+            font-family: red-rose;
+            font-size: 24px;
+        }
+    }
+}
+
+.card{
+    height: 100px;
+    aspect-ratio: 1 /1;
+    background-color: bisque;
+    border-radius: 20px;
+}
+
+.field{
+    display: flex;
+    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
