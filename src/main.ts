@@ -6,10 +6,6 @@ import { initSettings } from "./ts/setting-screen";
 init();
 initSettings();
 
-
-
-
-
 function init(){
     let fieldRef = document.getElementById('field') ;
 
@@ -26,21 +22,6 @@ function init(){
 
 
 
-interface Game {
-    theme : string,
-    colour : string,
-    size : number,
-}
 
-function displayUser(game:Game):Game{
-    
-    return game;
-}
 
-let newGame:Game = {
-    theme: "tele",
-    colour: "green",
-    size: 8,
-    
-}
 

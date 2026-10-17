@@ -4,3 +4,10 @@ export interface GameSettings{
     boardSize : number | null,
 }
 
+export interface MemoryCard {
+    id : number,
+    pairId : number,
+    img : string,
+    isFlipped : boolean,
+    isMatched : boolean
+}

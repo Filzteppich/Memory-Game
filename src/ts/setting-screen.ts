@@ -1,11 +1,13 @@
 import { GameSettings } from "./intefaces";
+import { initGameScreen } from "./game-screen";
+
 
 type Theme = "codeVibeTheme" | "gamingTheme" | "daProjectTheme";
 type PlayerColour = "blue" | "orange";
 type BoardSize = 16 | 24 | 36;
 
 
-let gameSettings:GameSettings = {
+export let gameSettings:GameSettings = {
     theme: null ,
     playerColour: null,
     boardSize: null,
@@ -40,6 +42,7 @@ export function initSettings(){
     if (startButtonRef) {
         startButtonRef.addEventListener("click", () => {
         console.log('game can start now');
+        initGameScreen()
         })
     }
 }
@@ -115,6 +118,8 @@ function validateGameSettings(){
         if (startButtonRef && gameSettings.theme && gameSettings.playerColour && gameSettings.boardSize !== null) {
             startButtonRef.disabled = false;
             startButtonRef.classList.remove('disabled');
+        }else{
+            return;
         }
     }
 

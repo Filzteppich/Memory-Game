@@ -1,0 +1,74 @@
+export const gameImages = {
+    "codeVibeTheme": [
+        "/assets/themes/code-vibe/img_1.png",
+        "/assets/themes/code-vibe/img_2.png",
+        "/assets/themes/code-vibe/img_3.png",
+        "/assets/themes/code-vibe/img_4.png",
+        "/assets/themes/code-vibe/img_5.png",
+        "/assets/themes/code-vibe/img_6.png",
+        "/assets/themes/code-vibe/img_7.png",
+        "/assets/themes/code-vibe/img_8.png",
+        "/assets/themes/code-vibe/img_9.png",
+        "/assets/themes/code-vibe/img_10.png",
+        "/assets/themes/code-vibe/img_11.png",
+        "/assets/themes/code-vibe/img_12.png",
+        "/assets/themes/code-vibe/img_13.png",
+        "/assets/themes/code-vibe/img_14.png",
+        "/assets/themes/code-vibe/img_15.png",
+        "/assets/themes/code-vibe/img_16.png",
+        "/assets/themes/code-vibe/img_17.png",
+        "/assets/themes/code-vibe/img_18.png",
+    ],
+    "gamingTheme" : [
+        "/assets/themes/game/img_1.png",
+        "/assets/themes/game/img_2.png",
+        "/assets/themes/game/img_3.png",
+        "/assets/themes/game/img_4.png",
+        "/assets/themes/game/img_5.png",
+        "/assets/themes/game/img_6.png",
+        "/assets/themes/game/img_7.png",
+        "/assets/themes/game/img_8.png",
+        "/assets/themes/game/img_9.png",
+        "/assets/themes/game/img_10.png",
+        "/assets/themes/game/img_11.png",
+        "/assets/themes/game/img_12.png",
+        "/assets/themes/game/img_13.png",
+        "/assets/themes/game/img_14.png",
+        "/assets/themes/game/img_15.png",
+        "/assets/themes/game/img_16.png",
+        "/assets/themes/game/img_17.png",
+        "/assets/themes/game/img_18.png",
+    ],
+    "daProjectTheme" : [
+        "/assets/themes/da/img_1.png",
+        "/assets/themes/da/img_2.png",
+        "/assets/themes/da/img_3.png",
+        "/assets/themes/da/img_4.png",
+        "/assets/themes/da/img_5.png",
+        "/assets/themes/da/img_6.png",
+        "/assets/themes/da/img_7.png",
+        "/assets/themes/da/img_8.png",
+        "/assets/themes/da/img_9.png",
+        "/assets/themes/da/img_10.png",
+        "/assets/themes/da/img_11.png",
+        "/assets/themes/da/img_12.png",
+        "/assets/themes/da/img_13.png",
+        "/assets/themes/da/img_14.png",
+        "/assets/themes/da/img_15.png",
+        "/assets/themes/da/img_16.png",
+        "/assets/themes/da/img_17.png",
+        "/assets/themes/da/img_18.png",
+    ]
+}
+
+const cardCover : object = {
+    "codeVibeTheme":[
+        "/assets/themes/code-vibe/card_back.png"
+    ],
+    "gamingTheme":[
+        "/assets/themes/game/card_back.png"
+    ],
+    "daProjectTheme":[
+        "/assets/themes/da/card_back.png"
+    ],
+}
