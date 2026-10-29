@@ -19,6 +19,8 @@ export function initSettings(){
     let radioPlayer = document.querySelectorAll<HTMLInputElement>('input[name="player-colour"]');
     let radioBoard = document.querySelectorAll<HTMLInputElement>('input[name="board-size"]');
     let startButtonRef = document.querySelector<HTMLButtonElement>(".overview__start-button");
+    let settingscreenRef = document.querySelector<HTMLElement>('.settingscreen');
+    let gamescreenRef = document.querySelector<HTMLElement>('.gamescreen');
 
     radioTheme.forEach((radio) => {
         radio.addEventListener("click", () => {
@@ -42,7 +44,9 @@ export function initSettings(){
     if (startButtonRef) {
         startButtonRef.addEventListener("click", () => {
         console.log('game can start now');
-        initGameScreen()
+        initGameScreen();
+        settingscreenRef?.classList.add('hidden');
+        gamescreenRef?.classList.remove('hidden');
         })
     }
 }

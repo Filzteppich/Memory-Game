@@ -61,7 +61,7 @@ export const gameImages = {
     ]
 }
 
-const cardCover : object = {
+export const cardCover  = {
     "codeVibeTheme":[
         "/assets/themes/code-vibe/card_back.png"
     ],

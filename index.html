@@ -29,7 +29,7 @@
         </div>
     </section>
 
-    <section class="settingscreen ">
+    <section class="settingscreen">
         <div class="settingscreen-wrapper">
             <div class="settings__headline">
                 <span class="settings__text">Settings</span> 
@@ -143,7 +143,7 @@
         </div>
     </section>
 
-    <section class="gamescreen hidden">
+    <section class="gamescreen hidden pink-font">
         <div class="gamescreen__wrapper">
             <div class="game__header">
                 <div class="game__player-overview">
@@ -159,22 +159,25 @@
             </div>
             <div class="game__field">
                 <section id="field" class="field">
-                    <button class="card"></button>
-                    <button class="card"></button>
-                    <button class="card"></button>
-                    <button class="card"></button>
-                    <button class="card"></button>
-                    <button class="card"></button>
-                    <button class="card"></button>
-                    <button class="card"></button>
-                    <button class="card"></button>
-                    <button class="card"></button>
-                    <button class="card"></button>
-                    <button class="card"></button>
-                    <button class="card"></button>
-                    <button class="card"></button>
-                    <button class="card"></button>
-                    <button class="card"></button>
+
+         <button class="card" type="button">
+            <div class="card__inner">
+                <div class="card__face">
+                    <img  src="./public/assets/themes/code-vibe/img_10.png" alt="">
+                </div>
+                <div class="card__face card__face--back">
+                    <img src="./public/assets/themes/code-vibe/card_back.png" alt="">
+                </div>
+            </div>
+        </button>
+        
+         <button class="card" type="button">
+            <div class="card__inner">
+                <img class="card__face card__face--front" alt="" src="./public/assets/themes/code-vibe/img_10.png">
+                <img class="card__face card__face--back" alt="" src="./public/assets/themes/code-vibe/card_back.png">
+            </div>
+        </button>
+    
                 </section>
 
             </div>
@@ -185,8 +188,9 @@
 
 </body>
 </html>
+<script type="module" src="./src/main.ts"></script>
 <script type="module" src="./src/ts/home-screen.ts"></script>
 <script type="module" src="./src/ts/setting-screen.ts"></script>
+<script type="module" src="./src/ts/templates.ts"></script>
 <script type="module" src="./src/ts/game-screen.ts"></script>
 <script type="module" src="./src/ts/themes.ts"></script>
-<script type="module" src="./src/main.ts"></script>

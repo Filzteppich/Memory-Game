@@ -11,3 +11,12 @@ export interface MemoryCard {
     isFlipped : boolean,
     isMatched : boolean
 }
+
+export interface GameState {
+    activePlayer : "blue" | "orange",
+    scoreBlue : number,
+    scoreOrange : number,
+    gameRunning : boolean,
+    gameOVer : boolean,
+
+}

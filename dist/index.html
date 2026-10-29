@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test</title>
-  <script type="module" crossorigin src="./assets/index-BySh9Gmw.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-Tf2u-FCo.css">
+  <script type="module" crossorigin src="./assets/index-oS2uRZE3.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CQLmbn5y.css">
 </head>
 <body>
 
-    <section class="startscreen d-none">
+    <section class="startscreen hidden">
         <div class="startscreen-content">
             <div class="startscreen-text">
                 <p>It's play time.</p>
                 <h1>Ready to play?</h1>
             </div>
             <div class="startscreen-button">
-                <button class="start-button">
+                <button id="" class="start-button">
                     <div class="controller_icon_container">
                         <img src="./assets/images/startscreen/stadia_controller_icon.png" alt="controller_icon">
                     </div>
@@ -50,15 +50,15 @@
                                 <div class="game-settings__options">
                                     <div class="game-settings__option">
                                         <label class="game-settings__radio">
-                                            <input type="radio" name="theme" checked>
+                                            <input type="radio" name="theme" value="codeVibeTheme">
                                             <span>Code Vibe Theme</span>
                                         </label>
                                         <label class="game-settings__radio">
-                                            <input type="radio" name="theme">
+                                            <input type="radio" name="theme" value="gamingTheme">
                                             <span>Gaming Theme</span>
                                         </label>
                                         <label class="game-settings__radio">
-                                            <input type="radio" name="theme">
+                                            <input type="radio" name="theme" value="daProjectTheme">
                                             <span>DA Projects theme</span>
                                         </label>
                                         
@@ -80,11 +80,11 @@
                                 <div class="game-settings__options">
                                     <div class="game-settings__option">
                                         <label class="game-settings__radio">
-                                            <input type="radio" name="player-colour">
+                                            <input type="radio" name="player-colour" value="blue">
                                             <span>Blue</span>
                                         </label>
                                         <label class="game-settings__radio">
-                                            <input type="radio" name="player-colour">
+                                            <input type="radio" name="player-colour" value="orange">
                                             <span>Orange</span>
                                         </label>
                                     </div>
@@ -103,15 +103,15 @@
                                 <div class="game-settings__options">
                                     <div class="game-settings__option">
                                         <label class="game-settings__radio">
-                                            <input type="radio" name="board-size">
+                                            <input type="radio" name="board-size" value="16">
                                             <span>16 Cards</span>
                                         </label>
                                         <label class="game-settings__radio">
-                                            <input type="radio" name="board-size">
+                                            <input type="radio" name="board-size" value="24">
                                             <span>24 Cards</span>
                                         </label>
                                         <label class="game-settings__radio">
-                                            <input type="radio" name="board-size">
+                                            <input type="radio" name="board-size" value="36">
                                             <span>36 Cards</span>
                                         </label>
                                         
@@ -127,15 +127,15 @@
                 </div>
                 <div class="settings__content--right">
                     <div class="overview__preview">
-                        <img src="./assets/code-vibes-theme-DUaQD8qz.png" alt="">
+                        <img id="themePreviewImg"  src="./assets/code-vibes-theme-DUaQD8qz.png" alt="">
                     </div>
                     <div class="overview">
-                        <div class="overview__active-option">Game theme</div>
+                        <div class="overview__active-option"><span id="gameThemeOverview">Game Theme</span></div>
                         <div class="overview__seperator"><hr></div>
-                        <div class="overview__active-option">Player</div>
+                        <div class="overview__active-option"><span id="gamePlayerOverview">Player</span></div>
                         <div class="overview__seperator"><hr></div>
-                        <div class="overview__active-option">Board size</div>
-                        <button class="overview__start-button">
+                        <div class="overview__active-option"><span id="gameBoardOverview">Board size</span></div>
+                        <button disabled class="overview__start-button disabled">
                             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAOdEVYdFNvZnR3YXJlAEZpZ21hnrGWYwAAAL5JREFUeAGtk9ENwiAQhv9rOkBH6AiwgY7gBOoGbmA7gd1AR3ED2ECcwG6Av1GjT0DDfclxD5AvcNyJMWYLYIJIhxpiDFwHofBGWQ8d5vYr884JKjDWRqaugTJtapPlODLtRGTlnLujgPwNWRK+JVB+YmQ/rvzJIgeu7tMVCsK3tGdcKD3rCH90WsLABl577zf1whgnhqXsmjqWbJu/W+1zoiIhJSPTiAWoT4pwBh9I/NpCQsP6vBo2oJ6ZruEJOPU5lmrwZMUAAAAASUVORK5CYII=" alt="">
                             <span>Start</span>
                         </button>
@@ -145,15 +145,48 @@
         </div>
     </section>
 
+    <section class="gamescreen hidden pink-font">
+        <div class="gamescreen__wrapper">
+            <div class="game__header">
+                <div class="game__player-overview">
+                    <div class="game__blue-player">Blue 0</div>
+                    <div class="game__orange-player">Orange 0</div>
+                </div>
+                <div class="game__current-player-overview">
+                    Current Player: Blue
+                </div>
+                <div class="game__exit">
+                    <button>Exit Game</button>
+                </div>
+            </div>
+            <div class="game__field">
+                <section id="field" class="field">
 
-    <!-- <section id="field" class="field">
-        <button class="card"></button>
-        <button class="card"></button>
-        <button class="card"></button>
-        <button class="card"></button>
-        <button class="card"></button>
-        <button class="card"></button>
-        <button class="card"></button>
-    </section> -->
+         <button class="card" type="button">
+            <div class="card__inner">
+                <div class="card__face">
+                    <img  src="data:image/png;base64,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" alt="">
+                </div>
+                <div class="card__face card__face--back">
+                    <img src="./assets/card_back-B-CVFQH4.png" alt="">
+                </div>
+            </div>
+        </button>
+        
+         <button class="card" type="button">
+            <div class="card__inner">
+                <img class="card__face card__face--front" alt="" src="data:image/png;base64,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">
+                <img class="card__face card__face--back" alt="" src="./assets/card_back-B-CVFQH4.png">
+            </div>
+        </button>
+    
+                </section>
+
+            </div>
+        </div>
+    </section>
+
+
+
 </body>
-</html>
+</html>

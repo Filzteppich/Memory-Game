@@ -1,4 +1,9 @@
 @use "../abstract/mixin";
+@use "../themes/themes";
+
+.pink-font{
+    @include themes.test;
+}
 
 
 .gamescreen{
@@ -63,15 +68,57 @@
 }
 
 .card{
-    height: 100px;
-    aspect-ratio: 1 /1;
-    background-color: bisque;
-    border-radius: 20px;
+    display: block;
+    width: fit-content;
+    padding: 0;
+    border: 0;
+    
+    background-color: transparent;
+    line-height: 0;
+    justify-self: start;
+    align-self: start;
+
+    &__inner{
+        position: relative;
+        width: fit-content;
+        transform-style: preserve-3d;
+        transition: transform 300ms ease-in-out;
+        border-radius: 20px;
+    }
+    
+    &__face{
+        display: block;
+        backface-visibility: hidden;
+        border-radius: 20px;
+    }
+
+    &__face--front{
+        position: relative;
+        transform: rotateY(180deg);
+    }
+
+    &__face--back{
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.game__field,
+.field{
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .field{
-    display: flex;
-    gap: 12px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    gap: 12px;
+    grid-template-columns: repeat(6, max-content);
+}
+
+.is-flipped .card__inner{
+    transform: rotateY(180deg);
 }
