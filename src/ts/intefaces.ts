@@ -18,5 +18,9 @@ export interface GameState {
     scoreOrange : number,
     gameRunning : boolean,
     gameOVer : boolean,
+}
 
+export interface CardSelectionState {
+    flippedCards : MemoryCard[],
+    isLocked : boolean
 }

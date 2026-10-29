@@ -1,4 +1,4 @@
-import { GameSettings, MemoryCard } from "./intefaces";
+import { CardSelectionState, GameSettings, MemoryCard } from "./intefaces";
 import { gameImages, cardCover } from "./themes";
 import { gameSettings } from "./setting-screen";
 import { createCardTemplate } from "./templates";
@@ -85,10 +85,17 @@ function renderCards(cards: MemoryCard[], theme:Theme): void {
 }
 
 function handleCardClick(cards: MemoryCard[]){
+    const selectionState : CardSelectionState = {
+        flippedCards:[],
+        isLocked : false
+    }
     const fieldRef = document.getElementById("field");
-
     if (fieldRef) {
         fieldRef.addEventListener("click", (event) => {
+            const target = event.target;
+            if (!(target instanceof Element) ) {
+                return;
+            }
             const card = (event.target as HTMLElement).closest(".card") as HTMLButtonElement;
            
             const id = Number(card.dataset.cardId) 
@@ -96,13 +103,56 @@ function handleCardClick(cards: MemoryCard[]){
             if (!memoryCard || memoryCard.isMatched || memoryCard.isFlipped) {
                 return
             }
-
-            memoryCard.isFlipped = true;
-             if (card && !card.classList.contains("is-flipped")) {
-                card.classList.add("is-flipped");
+            if (selectionState.flippedCards.length < 2 && card && !card.classList.contains("is-flipped") && !selectionState.isLocked) {
+                    card.classList.add("is-flipped");
+                    memoryCard.isFlipped = true;
+                    selectionState.flippedCards.push(memoryCard)
+                    console.log(memoryCard);
+                    console.log(selectionState.flippedCards);
+                }
+                if (selectionState.flippedCards.length === 2) {
+                selectionState.isLocked = true;
+                checkCardMatch(selectionState)
             }
-            console.log(memoryCard);
-            
         });
     }
+}
+
+function checkCardMatch(selectionState:CardSelectionState){
+    const firstCard = selectionState.flippedCards[0];
+    const secondCard = selectionState.flippedCards[1];
+
+    if (firstCard.pairId === secondCard.pairId) {
+        console.log("we got a match");
+        firstCard.isMatched = true;
+        secondCard.isMatched = true;
+        unflipCards(selectionState, true);
+    } else if (firstCard.pairId !== secondCard.pairId){
+        unflipCards(selectionState, false);
+    }
+}
+
+function unflipCards(selectionState: CardSelectionState, cardMatch: boolean) {
+    const flippedCards = selectionState.flippedCards;
+
+    if (cardMatch) {
+        flippedCards.forEach((flippedCard) => {
+            flippedCard.isMatched = true;
+        });
+        flippedCards.length = 0;
+        selectionState.isLocked = false;
+        return;
+    }
+
+    setTimeout(() => {
+        flippedCards.forEach((flippedCard) => {
+            const cardElement = document.querySelector<HTMLButtonElement>(
+                `.card[data-card-id="${flippedCard.id}"]`
+            );
+            cardElement?.classList.remove("is-flipped");
+            flippedCard.isFlipped = false;
+        });
+        flippedCards.length = 0;
+        selectionState.isLocked = false;
+    }, 700);
 }
