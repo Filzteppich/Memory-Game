@@ -1,4 +1,4 @@
-import { CardSelectionState, GameSettings, MemoryCard } from "./intefaces";
+import { CardSelectionState, GameState, MemoryCard } from "./intefaces";
 import { gameImages, cardCover } from "./themes";
 import { gameSettings } from "./setting-screen";
 import { createCardTemplate } from "./templates";
@@ -6,19 +6,46 @@ import { createCardTemplate } from "./templates";
 type Theme = keyof typeof cardCover;
 
 export function initGameScreen() {
-    const theme = gameSettings.theme;
+    const theme = gameSettings.theme as Theme;
+    const gameState = createGameState();
 
-    if (
-        theme === "codeVibeTheme" ||
-        theme === "gamingTheme" ||
-        theme === "daProjectTheme"
-    ) {
         const numberOfPairs = gameSettings.boardSize! / 2;
         const selectedCards = gameImages[theme].slice(0, numberOfPairs);
         const cards = createMemoryCards(selectedCards);
         shuffleArray(cards);
         renderCards(cards, theme);
-        handleCardClick(cards);
+        displayGameStats(gameState);
+        handleCardClick(cards, gameState);
+}
+
+function displayGameStats(gameState:GameState){
+    let blueScoreRef = document.querySelector<HTMLSpanElement>(".blue-score");
+    let orangeScoreRef = document.querySelector<HTMLSpanElement>(".orange-score");
+    let currentPlayerRef = document.querySelector<HTMLSpanElement>(".current-player");
+    const player = gameState.activePlayer;
+
+    if (blueScoreRef && orangeScoreRef && currentPlayerRef) {
+        blueScoreRef.textContent = String(gameState.scoreBlue);
+        orangeScoreRef.textContent = String(gameState.scoreOrange);
+        currentPlayerRef.textContent = player.charAt(0).toUpperCase() + player.slice(1);
+        
+    }
+}
+
+
+function createGameState():GameState{
+    const playerColour = gameSettings.playerColour;
+
+    if (playerColour !== "blue" && playerColour !== "orange") {
+        throw new Error("Player color not found");
+    }
+
+    return {
+        activePlayer : playerColour,
+        scoreBlue : 0,
+        scoreOrange : 0,
+        gameRunning : true,
+        gameOver : false,
     }
 }
 
@@ -47,7 +74,6 @@ function shuffleArray(cards: MemoryCard[]): MemoryCard[] {
     const j = Math.floor(Math.random() * (i + 1));
     [cards[i], cards[j]] = [cards[j], cards[i]]; // Elemente tauschen
   }
-  console.log(cards);
   
   return cards;
 }
@@ -84,7 +110,7 @@ function renderCards(cards: MemoryCard[], theme:Theme): void {
     gameField.replaceChildren(...cardElements);
 }
 
-function handleCardClick(cards: MemoryCard[]){
+function handleCardClick(cards: MemoryCard[], gameState:GameState){
     const selectionState : CardSelectionState = {
         flippedCards:[],
         isLocked : false
@@ -100,35 +126,44 @@ function handleCardClick(cards: MemoryCard[]){
            
             const id = Number(card.dataset.cardId) 
             const memoryCard = cards.find((card) => card.id === id);
-            if (!memoryCard || memoryCard.isMatched || memoryCard.isFlipped) {
+            if (!memoryCard || memoryCard.isMatched || memoryCard.isFlipped || selectionState.isLocked) {
                 return
             }
             if (selectionState.flippedCards.length < 2 && card && !card.classList.contains("is-flipped") && !selectionState.isLocked) {
                     card.classList.add("is-flipped");
                     memoryCard.isFlipped = true;
                     selectionState.flippedCards.push(memoryCard)
-                    console.log(memoryCard);
-                    console.log(selectionState.flippedCards);
                 }
                 if (selectionState.flippedCards.length === 2) {
                 selectionState.isLocked = true;
-                checkCardMatch(selectionState)
+                checkCardMatch(selectionState, gameState)
             }
         });
     }
 }
 
-function checkCardMatch(selectionState:CardSelectionState){
+function checkCardMatch(selectionState:CardSelectionState, gameState:GameState){
     const firstCard = selectionState.flippedCards[0];
     const secondCard = selectionState.flippedCards[1];
 
     if (firstCard.pairId === secondCard.pairId) {
-        console.log("we got a match");
         firstCard.isMatched = true;
         secondCard.isMatched = true;
+        playerScore(gameState);
         unflipCards(selectionState, true);
+        displayGameStats(gameState)
     } else if (firstCard.pairId !== secondCard.pairId){
         unflipCards(selectionState, false);
+        gameState.activePlayer = gameState.activePlayer === "blue" ? "orange": "blue";
+        displayGameStats(gameState)
+    }
+}
+
+function playerScore(gameState:GameState){
+    if (gameState.activePlayer === "blue") {
+        gameState.scoreBlue++
+    }else{
+        gameState.scoreOrange++
     }
 }
 
@@ -138,21 +173,29 @@ function unflipCards(selectionState: CardSelectionState, cardMatch: boolean) {
     if (cardMatch) {
         flippedCards.forEach((flippedCard) => {
             flippedCard.isMatched = true;
-        });
-        flippedCards.length = 0;
-        selectionState.isLocked = false;
-        return;
-    }
-
-    setTimeout(() => {
-        flippedCards.forEach((flippedCard) => {
-            const cardElement = document.querySelector<HTMLButtonElement>(
+                const cardElement = document.querySelector<HTMLButtonElement>(
                 `.card[data-card-id="${flippedCard.id}"]`
             );
-            cardElement?.classList.remove("is-flipped");
-            flippedCard.isFlipped = false;
+            setTimeout(() => {
+                cardElement?.classList.add("is-match");
+            }, 200);
         });
-        flippedCards.length = 0;
-        selectionState.isLocked = false;
-    }, 700);
+        setTimeout(() => {
+            selectionState.isLocked = false;
+            flippedCards.length = 0;
+        }, 200);
+        
+    }else{
+        setTimeout(() => {
+            flippedCards.forEach((flippedCard) => {
+                const cardElement = document.querySelector<HTMLButtonElement>(
+                    `.card[data-card-id="${flippedCard.id}"]`
+                );
+                cardElement?.classList.remove("is-flipped");
+                flippedCard.isFlipped = false;
+            });
+            flippedCards.length = 0;
+            selectionState.isLocked = false;
+        }, 700);
+    }
 }

@@ -1,5 +1,6 @@
-import { GameSettings } from "./intefaces";
+import { GameSettings, GameState } from "./intefaces";
 import { initGameScreen } from "./game-screen";
+
 
 
 type Theme = "codeVibeTheme" | "gamingTheme" | "daProjectTheme";
@@ -90,6 +91,7 @@ let playerOverview = document.querySelector<HTMLSpanElement>('#gamePlayerOvervie
             playerOverview.textContent = "Orange"
             break;
         }
+
         validateGameSettings()
     }
 }

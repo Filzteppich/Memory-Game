@@ -17,7 +17,7 @@ export interface GameState {
     scoreBlue : number,
     scoreOrange : number,
     gameRunning : boolean,
-    gameOVer : boolean,
+    gameOver : boolean,
 }
 
 export interface CardSelectionState {
