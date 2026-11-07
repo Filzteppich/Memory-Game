@@ -43,12 +43,12 @@ export function initSettings(){
     })
 
     if (startButtonRef) {
-        startButtonRef.addEventListener("click", () => {
+        startButtonRef.onclick = () => {
         console.log('game can start now');
         initGameScreen();
         settingscreenRef?.classList.add('hidden');
         gamescreenRef?.classList.remove('hidden');
-        })
+        }
     }
 }
 

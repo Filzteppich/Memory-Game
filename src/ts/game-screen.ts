@@ -16,6 +16,18 @@ export function initGameScreen() {
         renderCards(cards, theme);
         displayGameStats(gameState);
         handleCardClick(cards, gameState);
+        exitBtnClick();
+}
+
+function exitBtnClick(){
+    const extiBtnRef = document.getElementById('exitBtn');
+    
+    if (extiBtnRef) {
+        extiBtnRef.onclick = () =>{
+            console.log('it wooorks bro');
+            
+        }
+    }
 }
 
 function displayGameStats(gameState:GameState){
@@ -44,6 +56,7 @@ function createGameState():GameState{
         activePlayer : playerColour,
         scoreBlue : 0,
         scoreOrange : 0,
+        totalCardMatches : 0,
         gameRunning : true,
         gameOver : false,
     }
@@ -119,10 +132,12 @@ function handleCardClick(cards: MemoryCard[], gameState:GameState){
     if (fieldRef) {
         fieldRef.addEventListener("click", (event) => {
             const target = event.target;
-            if (!(target instanceof Element) ) {
+            if (!(target instanceof Element) ) return;
+            const card = target.closest<HTMLElement>(".card");
+            
+            if (!card) {
                 return;
             }
-            const card = (event.target as HTMLElement).closest(".card") as HTMLButtonElement;
            
             const id = Number(card.dataset.cardId) 
             const memoryCard = cards.find((card) => card.id === id);
@@ -151,11 +166,24 @@ function checkCardMatch(selectionState:CardSelectionState, gameState:GameState){
         secondCard.isMatched = true;
         playerScore(gameState);
         unflipCards(selectionState, true);
+        gameState.totalCardMatches++
+        console.log(gameState.totalCardMatches);
+        checkEndgame(gameState)
         displayGameStats(gameState)
+        
     } else if (firstCard.pairId !== secondCard.pairId){
         unflipCards(selectionState, false);
         gameState.activePlayer = gameState.activePlayer === "blue" ? "orange": "blue";
         displayGameStats(gameState)
+    }
+}
+
+function checkEndgame(gameState:GameState){
+    if (gameState.totalCardMatches * 2 == gameSettings.boardSize) {
+        console.log("game should be over now");
+        gameState.gameOver = true;
+        gameState.gameRunning = false;
+        console.log(gameState);
     }
 }
 

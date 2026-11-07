@@ -16,6 +16,7 @@ export interface GameState {
     activePlayer : "blue" | "orange",
     scoreBlue : number,
     scoreOrange : number,
+    totalCardMatches: number
     gameRunning : boolean,
     gameOver : boolean,
 }

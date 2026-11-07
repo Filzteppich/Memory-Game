@@ -9,3 +9,12 @@
     display: flex;
     gap: $gap;
 }
+
+@mixin red-rose($f-size, $f-weight){
+     font-family: red-rose;
+    font-weight: $f-weight;
+    font-size: $f-size;
+    letter-spacing: 0%;
+    text-align: center;
+}
+
