@@ -1,12 +1,17 @@
+
+
+
+
+export function showSettingsScreen(){
 const startButton = document.querySelector<HTMLButtonElement>(".start-button");
-const homeSection = document.querySelector<HTMLElement>(".startscreen")
-const settingSection = document.querySelector<HTMLElement>(".settingscreen")
-startButton?.addEventListener("click", showSettingsScreen);
+const homeSection = document.querySelector<HTMLElement>(".startscreen");
+const settingSection = document.querySelector<HTMLElement>(".settingscreen");
 
-
-
-function showSettingsScreen(){
-    homeSection?.classList.add('d-none');
-    settingSection?.classList.remove('d-none');
+if (startButton) {
+    startButton.onclick = () => {
+        homeSection?.classList.add('hidden');
+        settingSection?.classList.remove('hidden');
+    };
+}
 }
 

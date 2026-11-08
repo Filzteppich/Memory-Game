@@ -8,6 +8,7 @@ type Theme = keyof typeof cardCover;
 export function initGameScreen() {
     const theme = gameSettings.theme as Theme;
     const gameState = createGameState();
+    const gameController = new AbortController();
 
         const numberOfPairs = gameSettings.boardSize! / 2;
         const selectedCards = gameImages[theme].slice(0, numberOfPairs);
@@ -15,19 +16,59 @@ export function initGameScreen() {
         shuffleArray(cards);
         renderCards(cards, theme);
         displayGameStats(gameState);
-        handleCardClick(cards, gameState);
-        exitBtnClick();
-}
-
-function exitBtnClick(){
-    const extiBtnRef = document.getElementById('exitBtn');
+        handleCardClick(cards, gameState, gameController);
+        exitBtnClick(gameState);
+        leaveGame(gameController);
+    }
     
-    if (extiBtnRef) {
-        extiBtnRef.onclick = () =>{
-            console.log('it wooorks bro');
-            
+function leaveGame(controller:AbortController){
+    const exitConfirmBtn = document.querySelector<HTMLElement>('.exit__button--confirm');
+    const exitDialogue = document.querySelector<HTMLElement>('.exit__dialogue');
+    const exitWrapper = document.querySelector<HTMLElement>('.exit__wrapper');
+
+    if (exitConfirmBtn && exitDialogue && exitWrapper) {
+        exitConfirmBtn.onclick = () => {
+            removeExitOverlay(exitDialogue, exitWrapper);
+            setTimeout(() => {
+                controller.abort()
+            }, 700);
         }
     }
+};
+
+
+
+    function exitBtnClick(gameState:GameState){
+    const extiBtnRef = document.getElementById('exitBtn');
+    const exitDialogue = document.querySelector<HTMLElement>('.exit__dialogue');
+    const exitWrapper = document.querySelector<HTMLElement>('.exit__wrapper');
+    const exitCancelBtn = document.querySelector<HTMLElement>('.exit__button--cancel');
+
+    if (extiBtnRef && exitDialogue?.classList.contains('hidden') && exitWrapper && exitCancelBtn && gameState.gameRunning) {
+        exitWrapper.onclick = (event) => {event.stopPropagation()}
+        extiBtnRef.onclick = () =>{
+        exitDialogue.classList.remove('hidden')
+        setTimeout(() => {
+            exitDialogue.classList.add('show')
+            setTimeout(() => {
+                exitWrapper.classList.add('show')
+            }, 200);
+        }, 100);
+        }
+    exitDialogue.onclick = () => removeExitOverlay(exitDialogue, exitWrapper);
+    exitCancelBtn.onclick = () => removeExitOverlay(exitDialogue, exitWrapper);
+       
+    }
+}
+
+function removeExitOverlay(exitDialogue:HTMLElement, exitWrapper:HTMLElement){
+               exitWrapper.classList.remove('show');
+           setTimeout(() => {
+               exitDialogue.classList.remove('show');
+               setTimeout(() => {
+                   exitDialogue.classList.add('hidden');
+               }, 300);
+           }, 400);
 }
 
 function displayGameStats(gameState:GameState){
@@ -123,10 +164,10 @@ function renderCards(cards: MemoryCard[], theme:Theme): void {
     gameField.replaceChildren(...cardElements);
 }
 
-function handleCardClick(cards: MemoryCard[], gameState:GameState){
+function handleCardClick(cards: MemoryCard[], gameState:GameState, controller: AbortController){
     const selectionState : CardSelectionState = {
         flippedCards:[],
-        isLocked : false
+        isLocked : false,
     }
     const fieldRef = document.getElementById("field");
     if (fieldRef) {
@@ -153,7 +194,7 @@ function handleCardClick(cards: MemoryCard[], gameState:GameState){
                 selectionState.isLocked = true;
                 checkCardMatch(selectionState, gameState)
             }
-        });
+        }, {signal : controller.signal});
     }
 }
 

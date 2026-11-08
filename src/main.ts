@@ -1,13 +1,13 @@
 import "./scss/main.scss"
 import { initSettings } from "./ts/setting-screen";
-
+import { showSettingsScreen } from "./ts/home-screen";
 
 
 init();
-initSettings();
 
 function init(){
-   
+   showSettingsScreen(); 
+    initSettings();
 }
 
 

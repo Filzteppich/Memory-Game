@@ -32,6 +32,15 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        opacity: 0;
+        transition: opacity 300ms ease-in-out;
+        z-index: 1;
+        &:hover{
+            cursor: pointer;
+        }
+        &.show{
+            opacity: 1;
+        }
     }
     &__wrapper{
         position: absolute;
@@ -43,6 +52,14 @@
         gap: 54px;
         padding: 40px;
         box-sizing: border-box;
+        transform: translateY(-1000px);
+        transition: transform 400ms ease-in-out;
+        &.show{
+            transform: translateY(0)
+        }
+        &:hover{
+            cursor: default
+        }
     }
     &__text{
         @include mixin.red-rose(32px, 700);
@@ -79,6 +96,10 @@
             }
         }
     }
+}
+
+.exit__wrapper .show{
+    left: 80%;
 }
 
 
