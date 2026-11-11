@@ -96,6 +96,20 @@ let playerOverview = document.querySelector<HTMLSpanElement>('#gamePlayerOvervie
     }
 }
 
+export function restoreInputFields(){
+    const radios = document.querySelectorAll<HTMLInputElement>("input[type='radio']");
+
+    radios.forEach((radio) =>{
+        radio.checked = false;
+    });
+
+    gameSettings = {
+        boardSize: null,
+        playerColour : null,
+        theme : null,
+    }   
+}
+
 
 function initBoard(boardSize:BoardSize):void{
     let boardOverview = document.querySelector<HTMLSpanElement>('#gameBoardOverview');
@@ -118,14 +132,15 @@ function initBoard(boardSize:BoardSize):void{
 }
 
 
-function validateGameSettings(){
+export function validateGameSettings(){
     let startButtonRef = document.querySelector<HTMLButtonElement>(".overview__start-button");
 
-        if (startButtonRef && gameSettings.theme && gameSettings.playerColour && gameSettings.boardSize !== null) {
+        if (startButtonRef && gameSettings.theme !== null && gameSettings.playerColour !== null && gameSettings.boardSize !== null) {
             startButtonRef.disabled = false;
             startButtonRef.classList.remove('disabled');
-        }else{
-            return;
+        }else if(startButtonRef && gameSettings.theme == null && gameSettings.playerColour == null && gameSettings.boardSize == null){
+            startButtonRef.disabled = true;
+            startButtonRef.classList.add('disabled');
         }
     }
 

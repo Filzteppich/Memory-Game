@@ -1,6 +1,6 @@
 import { CardSelectionState, GameState, MemoryCard } from "./intefaces";
 import { gameImages, cardCover } from "./themes";
-import { gameSettings } from "./setting-screen";
+import { gameSettings, restoreInputFields, validateGameSettings } from "./setting-screen";
 import { createCardTemplate } from "./templates";
 
 type Theme = keyof typeof cardCover;
@@ -16,10 +16,17 @@ export function initGameScreen() {
         shuffleArray(cards);
         renderCards(cards, theme);
         displayGameStats(gameState);
+        displayActivePlayer(theme);
         handleCardClick(cards, gameState, gameController);
         exitBtnClick(gameState);
         leaveGame(gameController);
     }
+
+function displayActivePlayer(theme:Theme){
+    if (theme == "codeVibeTheme") {
+        
+    }
+}
     
 function leaveGame(controller:AbortController){
     const exitConfirmBtn = document.querySelector<HTMLElement>('.exit__button--confirm');
@@ -31,45 +38,39 @@ function leaveGame(controller:AbortController){
             removeExitOverlay(exitDialogue, exitWrapper);
             setTimeout(() => {
                 controller.abort()
+                leaveGameScreen();
             }, 700);
         }
     }
 };
 
+function leaveGameScreen(){
+    const settingScreen = document.querySelector<HTMLElement>('.settingscreen');
+    const gameScreen = document.querySelector<HTMLElement>('.gamescreen');
 
+    settingScreen?.classList.remove('hidden');
+    gameScreen?.classList.add('hidden');
+    restoreInputFields();
+    restoreSettingsOverview();
+    console.log(gameSettings);
+    validateGameSettings();
+    
+}
 
-    function exitBtnClick(gameState:GameState){
-    const extiBtnRef = document.getElementById('exitBtn');
-    const exitDialogue = document.querySelector<HTMLElement>('.exit__dialogue');
-    const exitWrapper = document.querySelector<HTMLElement>('.exit__wrapper');
-    const exitCancelBtn = document.querySelector<HTMLElement>('.exit__button--cancel');
+function restoreSettingsOverview(){
+    let themeSource = document.querySelector<HTMLImageElement>('#themePreviewImg');
+    let themeOverview = document.querySelector<HTMLSpanElement>('#gameThemeOverview');
+    let playerOverview = document.querySelector<HTMLSpanElement>('#gamePlayerOverview');
+    let boardOverview = document.querySelector<HTMLSpanElement>('#gameBoardOverview');
 
-    if (extiBtnRef && exitDialogue?.classList.contains('hidden') && exitWrapper && exitCancelBtn && gameState.gameRunning) {
-        exitWrapper.onclick = (event) => {event.stopPropagation()}
-        extiBtnRef.onclick = () =>{
-        exitDialogue.classList.remove('hidden')
-        setTimeout(() => {
-            exitDialogue.classList.add('show')
-            setTimeout(() => {
-                exitWrapper.classList.add('show')
-            }, 200);
-        }, 100);
-        }
-    exitDialogue.onclick = () => removeExitOverlay(exitDialogue, exitWrapper);
-    exitCancelBtn.onclick = () => removeExitOverlay(exitDialogue, exitWrapper);
-       
+    if (themeSource && themeOverview && playerOverview && boardOverview) {
+        themeSource.src = "./public/assets/images/settingscreen/code-vibes-theme.png";
+        themeOverview.textContent = "Game Theme";
+        playerOverview.textContent = "Player";
+        boardOverview.textContent = "Board size";
     }
 }
 
-function removeExitOverlay(exitDialogue:HTMLElement, exitWrapper:HTMLElement){
-               exitWrapper.classList.remove('show');
-           setTimeout(() => {
-               exitDialogue.classList.remove('show');
-               setTimeout(() => {
-                   exitDialogue.classList.add('hidden');
-               }, 300);
-           }, 400);
-}
 
 function displayGameStats(gameState:GameState){
     let blueScoreRef = document.querySelector<HTMLSpanElement>(".blue-score");
@@ -123,6 +124,7 @@ function createMemoryCards(images:string[]):MemoryCard[]{
         return cards;
 }
 
+
 function shuffleArray(cards: MemoryCard[]): MemoryCard[] {
   for (let i = cards.length - 1; i >= 1; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -131,6 +133,7 @@ function shuffleArray(cards: MemoryCard[]): MemoryCard[] {
   
   return cards;
 }
+
 
 function renderCards(cards: MemoryCard[], theme:Theme): void {
     const gameField = document.querySelector<HTMLElement>("#field");
@@ -163,6 +166,7 @@ function renderCards(cards: MemoryCard[], theme:Theme): void {
     });
     gameField.replaceChildren(...cardElements);
 }
+
 
 function handleCardClick(cards: MemoryCard[], gameState:GameState, controller: AbortController){
     const selectionState : CardSelectionState = {
@@ -198,6 +202,7 @@ function handleCardClick(cards: MemoryCard[], gameState:GameState, controller: A
     }
 }
 
+
 function checkCardMatch(selectionState:CardSelectionState, gameState:GameState){
     const firstCard = selectionState.flippedCards[0];
     const secondCard = selectionState.flippedCards[1];
@@ -219,6 +224,7 @@ function checkCardMatch(selectionState:CardSelectionState, gameState:GameState){
     }
 }
 
+
 function checkEndgame(gameState:GameState){
     if (gameState.totalCardMatches * 2 == gameSettings.boardSize) {
         console.log("game should be over now");
@@ -228,6 +234,7 @@ function checkEndgame(gameState:GameState){
     }
 }
 
+
 function playerScore(gameState:GameState){
     if (gameState.activePlayer === "blue") {
         gameState.scoreBlue++
@@ -235,6 +242,7 @@ function playerScore(gameState:GameState){
         gameState.scoreOrange++
     }
 }
+
 
 function unflipCards(selectionState: CardSelectionState, cardMatch: boolean) {
     const flippedCards = selectionState.flippedCards;
@@ -267,4 +275,39 @@ function unflipCards(selectionState: CardSelectionState, cardMatch: boolean) {
             selectionState.isLocked = false;
         }, 700);
     }
+}
+
+
+function exitBtnClick(gameState:GameState){
+    const extiBtnRef = document.getElementById('exitBtn');
+    const exitDialogue = document.querySelector<HTMLElement>('.exit__dialogue');
+    const exitWrapper = document.querySelector<HTMLElement>('.exit__wrapper');
+    const exitCancelBtn = document.querySelector<HTMLElement>('.exit__button--cancel');
+
+    if (extiBtnRef && exitDialogue?.classList.contains('hidden') && exitWrapper && exitCancelBtn && gameState.gameRunning) {
+        exitWrapper.onclick = (event) => {event.stopPropagation()}
+        extiBtnRef.onclick = () =>{
+        exitDialogue.classList.remove('hidden')
+        setTimeout(() => {
+            exitDialogue.classList.add('show')
+            setTimeout(() => {
+                exitWrapper.classList.add('show')
+            }, 200);
+        }, 100);
+        }
+    exitDialogue.onclick = () => removeExitOverlay(exitDialogue, exitWrapper);
+    exitCancelBtn.onclick = () => removeExitOverlay(exitDialogue, exitWrapper);
+       
+    }
+}
+
+
+function removeExitOverlay(exitDialogue:HTMLElement, exitWrapper:HTMLElement){
+               exitWrapper.classList.remove('show');
+           setTimeout(() => {
+               exitDialogue.classList.remove('show');
+               setTimeout(() => {
+                   exitDialogue.classList.add('hidden');
+               }, 300);
+           }, 400);
 }
