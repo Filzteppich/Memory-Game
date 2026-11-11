@@ -136,6 +136,9 @@
     &__current-player-overview{
         font-size: 26px;
         color: white;
+        display: flex;
+        gap: 8px;
+        align-items: center;
     }
 
     &__exit{
@@ -149,6 +152,20 @@
         }
     }
 }
+
+.game__blue-player,
+.game__orange-player{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    >div>img{
+        display: flex;
+        align-items: center;
+    }
+}
+
+
+
 
 .card{
     display: block;

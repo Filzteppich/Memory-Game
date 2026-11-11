@@ -1,4 +1,4 @@
-import { CardSelectionState, GameState, MemoryCard } from "./intefaces";
+import { CardSelectionState, GameState, MemoryCard, ThemeIcons } from "./intefaces";
 import { gameImages, cardCover } from "./themes";
 import { gameSettings, restoreInputFields, validateGameSettings } from "./setting-screen";
 import { createCardTemplate } from "./templates";
@@ -16,13 +16,22 @@ export function initGameScreen() {
         shuffleArray(cards);
         renderCards(cards, theme);
         displayGameStats(gameState);
-        displayActivePlayer(theme);
+        createThemeIcons(theme);
         handleCardClick(cards, gameState, gameController);
         exitBtnClick(gameState);
         leaveGame(gameController);
     }
 
-function displayActivePlayer(theme:Theme){
+function createThemeIcons(theme:Theme){
+    document.querySelector<HTMLElement>('.game__blue-player')
+    const themeIcons:ThemeIcons = {
+        activePlayerIcon : null,
+        bluePlayerIcon : null,
+        orangePlayerIcon : null,
+        blueWin : null,
+        orangeWin : null,
+        drawIcon : null,
+    } 
     if (theme == "codeVibeTheme") {
         
     }
