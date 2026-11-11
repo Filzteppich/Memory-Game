@@ -8,6 +8,7 @@ type Theme = keyof typeof cardCover;
 export function initGameScreen() {
     const theme = gameSettings.theme as Theme;
     const gameState = createGameState();
+    const themeIcons = createThemeIcons(theme);
     const gameController = new AbortController();
 
         const numberOfPairs = gameSettings.boardSize! / 2;
@@ -16,14 +17,13 @@ export function initGameScreen() {
         shuffleArray(cards);
         renderCards(cards, theme);
         displayGameStats(gameState);
-        createThemeIcons(theme);
         handleCardClick(cards, gameState, gameController);
         exitBtnClick(gameState);
         leaveGame(gameController);
     }
 
 function createThemeIcons(theme:Theme){
-    document.querySelector<HTMLElement>('.game__blue-player')
+    const bluePlayerIcon = document.querySelector<HTMLElement>('.game__blue-player');
     const themeIcons:ThemeIcons = {
         activePlayerIcon : null,
         bluePlayerIcon : null,
@@ -33,7 +33,8 @@ function createThemeIcons(theme:Theme){
         drawIcon : null,
     } 
     if (theme == "codeVibeTheme") {
-        
+        themeIcons.bluePlayerIcon = "./public/assets/themes/code-vibe/blue_label.png";
+
     }
 }
     
