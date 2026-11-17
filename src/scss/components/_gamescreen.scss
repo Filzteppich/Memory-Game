@@ -23,6 +23,59 @@
     }
 }
 
+.end-screen{
+    width: 1440px;
+    height: 100%;
+    background-color: var(--gamescreen-bg-c);
+    position: relative;
+    @include mixin.dflex;
+}
+
+.game-over{
+    @include mixin.dflex-gap(124px);
+    flex-direction: column;
+    &__headline{
+        @include mixin.red-rose(124px,700);
+        >span{
+            display: inline-block;
+            color: #4DD5BC;
+            text-shadow: -7px 0px 8px #4DD5BC80,
+            -2px -2px 0 #FFFFFF;
+
+        }
+    }
+    &__score{
+        @include mixin.dflex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        &-wrapper{
+            display: flex;
+            flex-direction: row;
+            gap: 32px;
+        }
+    }
+    &__player-score{
+        display: flex;
+        flex-direction: row;
+        gap: 4px;
+        @include mixin.red-rose(26px,400);
+    }
+}
+
+.--blue{
+    color: var(--blue-player-c)
+}
+
+.--orange{
+    color: var(--orange-player-c)
+}
+
+.final-score-text{
+    @include mixin.red-rose(26px,400);
+    color: white;
+}
+
 .exit{
     &__dialogue{
         position: absolute;

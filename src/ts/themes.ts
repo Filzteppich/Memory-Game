@@ -72,3 +72,27 @@ export const cardCover  = {
         "/assets/themes/da/card_back.png"
     ],
 }
+
+export const themeIconPaths = {
+    codeVibeTheme : {
+        bluePlayerIcon : "./public/assets/themes/code-vibe/blue_label.png",
+        orangePlayerIcon : "./public/assets/themes/code-vibe/orange_label.png",
+        blueWin : "./public/assets/themes/code-vibe/blue_win.png",
+        orangeWin : "./public/assets/themes/code-vibe/orange_win.png",
+        drawIcon : "./public/assets/themes/code-vibe/draw.png",
+    },
+    gamingTheme : {
+        bluePlayerIcon : "./public/assets/themes/da/blue_pawn.png",
+        orangePlayerIcon : "./public/assets/themes/da/orange_pawn.png",
+        blueWin : "./public/assets/themes/da/blue_win",
+        orangeWin : "./public/assets/themes/da/orange_win.png",
+        drawIcon : "./public/assets/themes/da/draw.png",
+    },
+    daProjectTheme : {
+        bluePlayerIcon : "./public/assets/themes/game/blue_pawn.png",
+        orangePlayerIcon : "./public/assets/themes/game/orange_pawn.png",
+        blueWin : "./public/assets/themes/game/blue_win.png",
+        orangeWin : "./public/assets/themes/game/orange_win",
+        drawIcon : "./public/assets/themes/game/draw.png",
+    }
+}

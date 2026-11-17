@@ -29,7 +29,6 @@ export interface CardSelectionState {
 export interface ThemeIcons {
     bluePlayerIcon : string | null,
     orangePlayerIcon : string | null,
-    activePlayerIcon : string | null,
     blueWin : string | null,
     orangeWin : string | null,
     drawIcon : string | null

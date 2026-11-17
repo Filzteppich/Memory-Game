@@ -1,5 +1,5 @@
 import { CardSelectionState, GameState, MemoryCard, ThemeIcons } from "./intefaces";
-import { gameImages, cardCover } from "./themes";
+import { gameImages, cardCover, themeIconPaths } from "./themes";
 import { gameSettings, restoreInputFields, validateGameSettings } from "./setting-screen";
 import { createCardTemplate } from "./templates";
 
@@ -23,9 +23,12 @@ export function initGameScreen() {
     }
 
 function createThemeIcons(theme:Theme){
-    const bluePlayerIcon = document.querySelector<HTMLElement>('.game__blue-player');
+    const bluePlayerIcon = document.querySelector<HTMLImageElement>('.blue-icon');
+    const orangePlayerIcon = document.querySelector<HTMLImageElement>('.orange-icon');
+    const currentPlayerIcon = document.querySelector<HTMLImageElement>('.current-player-icon');
+    
+    
     const themeIcons:ThemeIcons = {
-        activePlayerIcon : null,
         bluePlayerIcon : null,
         orangePlayerIcon : null,
         blueWin : null,
